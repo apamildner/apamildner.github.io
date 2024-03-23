@@ -1,7 +1,7 @@
 +++
 title = 'The easy way to understand terraform provider aliasing'
 date = 2024-03-22T10:10:47+01:00
-draft = true
+draft = false
 summary = 'This blogg post explains how to use provider aliases and explains some common gotchas'
 +++
 
