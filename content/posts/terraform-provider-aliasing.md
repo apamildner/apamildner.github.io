@@ -5,7 +5,7 @@ draft = false
 summary = 'This blogg post explains how to use provider aliases and explains some common gotchas'
 +++
 
-This is the blogpost I needed to read when I had some problems with configuring my terraform providers and when I really needed to understand how it works. I didn't think the terraform [docs](https://developer.hashicorp.com/terraform/language/providers/configuration) on the topic were concise or provided enough examples so I had a hard time figuring things out. As expected it was quite easy once you know how it works, and here is the resulting blogpost for your convenience.
+This is the blogpost I needed to read when I had some problems with configuring my terraform providers and when I really needed to understand how it works. I didn't think the terraform [docs](https://developer.hashicorp.com/terraform/language/providers/configuration) on the topic were detailed enough or provided enough examples so I had a hard time figuring things out. As expected it was quite easy once you know how it works, and here is the resulting blogpost for your convenience.
 
 # Let's start the show with some gotchas
 When using providers that's not part of `hashicorp/*` providers, a block like this is needed
@@ -17,14 +17,14 @@ terraform {
       version = "~> 0.9.0"
     }
   }
-  required_version = ">= 1.3"
+  required_version = ">= 1.5"
 }
 ```
 This is not always obvious, as the default in terraform is to assume you mean `hashicorp/{providername}` of the latest available version when you use a provider. 
 This is an example using the `aws` provider, which is then assumed to mean `hashicorp/aws`
 ```hcl
 # Assumes you mean `hashicorp/aws`from hashicorp provider registry
-provideer "aws" {
+provider "aws" {
 
 }
 ```
@@ -131,7 +131,7 @@ terraform {
       version = "~> 0.9.0"
     }
   }
-  required_version = ">= 1.3"
+  required_version = ">= 1.5"
 }
 # Queries something using the restful provider by default,
 # which was overridden by the parent to mean restful.api-X
@@ -187,7 +187,7 @@ provider "restful" {
 
 module "child_module" {
     source "./modules/child"
-    provider = {
+    providers = {
         restful.api_X = restful.api_X
         restful.api_Y = restful.api_Y
     }
